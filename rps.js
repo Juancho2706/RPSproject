@@ -87,7 +87,7 @@ function juego(){
 let rondastotales = 0;
 let victoriasPC = 0;
 let victoriasPlayer = 0;
-juego();
+// juego();
 console.log("PC: "+victoriasPC+"  Player: "+victoriasPlayer);
 if(victoriasPC > victoriasPlayer){
     victoriasPC = 0;
