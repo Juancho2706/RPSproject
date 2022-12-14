@@ -1,4 +1,10 @@
-.bod{
-    background-color: aqua;
+body{
+    background-color: black;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
 
+.rondas{
+    color: white;
 }

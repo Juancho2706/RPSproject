@@ -20,8 +20,6 @@ function getComputerChoice(){
 }
 
 function playerSelection(decisionplayer){
-    do{
-        decisionplayer = prompt("Coloca tu decision: (piedra, papel o tijera)");
         if(decisionplayer == null){
             alert("Juego cancelado!");
         }else{
@@ -33,7 +31,6 @@ function playerSelection(decisionplayer){
                 decisionplayer = null;
             }
         }
-    }while(decisionplayer == null);
 }
 
 function rondas(ladecisionCPU, ladecisionPlayer){
@@ -64,44 +61,49 @@ function rondas(ladecisionCPU, ladecisionPlayer){
         }
     }
 }
-function juego(){
+function juego(seleccionPLAYER){
     let resultado = 0;
-    for(let i = 0; i <= 4; i++){
-        resultado = rondas(getComputerChoice(),playerSelection());
+        resultado = rondas(getComputerChoice(),seleccionPLAYER);
         console.log(resultado);
         if(resultado == 0){
             victoriasPC  += 1;
-            console.log('Gano la pc');
-            // alert("Gano la PC! /nPC:" + victoriasPC + " Player:" + victoriasPlayer);
+            rondastotales += 1;
+            losResultados.textContent = 'Rondas Totales:'+rondastotales;
+            quienGano.textContent = 'Gano la pc';
         }else if(resultado == 1){
             victoriasPlayer += 1;
-            console.log('Gano el jugador');
-            // alert("Gano el Jugador! /nPC:" + victoriasPC + " Player:" + victoriasPlayer);
+            rondastotales += 1;
+            losResultados.textContent = 'Rondas Totales:'+rondastotales;
+            quienGano.textContent = 'Gano el Jugador';
         }else{
-            console.log('Fue empate');
-            // alert("Fue empate xD");
+            rondastotales += 1;
+            losResultados.textContent = 'Rondas Totales:'+rondastotales;
+            quienGano.textContent = 'Fue empate uwu';
         }
-    }
 }
 
-let rondastotales = 0;
-let victoriasPC = 0;
-let victoriasPlayer = 0;
-// juego();
-console.log("PC: "+victoriasPC+"  Player: "+victoriasPlayer);
-if(victoriasPC > victoriasPlayer){
-    victoriasPC = 0;
-    victoriasPlayer = 0;
-    rondastotales += 1;
-    console.log("GANO LA PC!, Rondas totales:"+rondastotales);
-}else if(victoriasPC < victoriasPlayer){
-    victoriasPC = 0;
-    victoriasPlayer = 0;
-    rondastotales += 1;
-    console.log("GANO EL JUGADOR!, Rondas totales:"+rondastotales);
-}else{
-    victoriasPC = 0;
-    victoriasPlayer = 0;
-    rondastotales += 1;
-    console.log("QUEDARON EMPATADOS!, Rondas totales:"+rondastotales);
-}
+let rondastotales = 0,
+victoriasPC = 0,
+victoriasPlayer = 0;
+
+const elbotonselectorPiedra = document.querySelector(".piedra"),
+elbotonselectorPapel = document.querySelector(".papel"),
+elbotonselectorTijera = document.querySelector(".tijera"),
+losResultados = document.querySelector(".resultados"),
+quienGano = document.createElement('p');
+quienGano.style.color = "white";
+quienGano.textContent = "?";
+
+elbotonselectorPiedra.addEventListener("click", function(e){
+    juego(playerSelection("piedra"));
+});
+elbotonselectorPapel.addEventListener("click", function(e){
+    juego(playerSelection("papel"));
+});
+elbotonselectorTijera.addEventListener("click", function(e){
+    juego(playerSelection("tijera"));
+});
+
+losResultados.style.color = "white";
+losResultados.textContent = 'Rondas Totales:'+rondastotales;
+losResultados.appendChild(quienGano);
