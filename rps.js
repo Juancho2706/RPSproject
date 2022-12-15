@@ -68,18 +68,30 @@ function juego(seleccionPLAYER){
         if(resultado == 0){
             victoriasPC  += 1;
             rondastotales += 1;
-            losResultados.textContent = 'Rondas Totales:'+rondastotales;
-            quienGano.textContent = 'Gano la pc';
+            losResultados.innerText = 'Rondas Totales:'+rondastotales;
+            quienGano.innerText = 'Punto para la PC';
+            losResultados.append(quienGano);
         }else if(resultado == 1){
             victoriasPlayer += 1;
             rondastotales += 1;
-            losResultados.textContent = 'Rondas Totales:'+rondastotales;
-            quienGano.textContent = 'Gano el Jugador';
+            losResultados.innerText = 'Rondas Totales:'+rondastotales;
+            quienGano.innerText = 'Punto para el Jugador';
+            losResultados.append(quienGano);
         }else{
             rondastotales += 1;
-            losResultados.textContent = 'Rondas Totales:'+rondastotales;
-            quienGano.textContent = 'Fue empate uwu';
+            losResultados.innerText = 'Rondas Totales:'+rondastotales;
+            quienGano.innerText = 'Fue empate uwu, no hay puntos!';
+            losResultados.append(quienGano);
         }
+    if(victoriasPC == 5){
+        quienGano.innerText = 'GANO LA PC';
+        victoriasPC = 0;
+        victoriasPlayer = 0;
+    }else if(victoriasPlayer == 5){
+        quienGano.innerText = 'GANO EL JUGADOR';
+        victoriasPC = 0;
+        victoriasPlayer = 0;
+    }
 }
 
 let rondastotales = 0,
@@ -91,6 +103,7 @@ elbotonselectorPapel = document.querySelector(".papel"),
 elbotonselectorTijera = document.querySelector(".tijera"),
 losResultados = document.querySelector(".resultados"),
 quienGano = document.createElement('p');
+
 quienGano.style.color = "white";
 quienGano.textContent = "?";
 
@@ -106,4 +119,4 @@ elbotonselectorTijera.addEventListener("click", function(e){
 
 losResultados.style.color = "white";
 losResultados.textContent = 'Rondas Totales:'+rondastotales;
-losResultados.appendChild(quienGano);
+

@@ -3,8 +3,45 @@ body{
     margin: 0px;
     padding: 0px;
     border: 0px;
+    text-align: center;
 }
 
 .rondas{
     color: white;
+    font-family: championshipregular;
+    font-size: xxx-large;
+    text-align: center;
+}
+
+@font-face {
+    font-family: 'championshipregular';
+    src: url('fonts/championship-webfont.woff2') format('woff2'),
+         url('fonts/championship-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.back-video{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+@media(min-aspect-ratio: 16/9){
+    .back-video{
+        width: 100%;
+        height: auto;
+    }
+}
+@media(max-aspect-ratio: 16/9){
+    .back-video{
+        width: auto;
+        height: 100%;
+    }
+}
+.flexicentro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
