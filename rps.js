@@ -13,12 +13,10 @@ function numeroadecision(elnumeroelejido){
             break;
     }
 }
-
 function getComputerChoice(){
     let decisionPC = numeroadecision(Math.floor(Math.random() * 3));
     return decisionPC;
 }
-
 function playerSelection(decisionplayer){
         if(decisionplayer == null){
             alert("Juego cancelado!");
@@ -32,7 +30,6 @@ function playerSelection(decisionplayer){
             }
         }
 }
-
 function rondas(ladecisionCPU, ladecisionPlayer){
     if(ladecisionCPU == ladecisionPlayer){
         return 2; // los 2 son empate, osea no puntos
@@ -62,38 +59,45 @@ function rondas(ladecisionCPU, ladecisionPlayer){
     }
 }
 function juego(seleccionPLAYER){
-    let resultado = 0;
         resultado = rondas(getComputerChoice(),seleccionPLAYER);
-        console.log(resultado);
         if(resultado == 0){
             victoriasPC  += 1;
             rondastotales += 1;
+            $puntoscomputadora.innerText = victoriasPC;
+            document.querySelector('.computadora').appendChild($puntoscomputadora);
             losResultados.innerText = 'Rondas Totales:'+rondastotales;
             quienGano.innerText = 'Punto para la PC';
-            losResultados.append(quienGano);
+            document.querySelector('body').appendChild(quienGano);
         }else if(resultado == 1){
             victoriasPlayer += 1;
             rondastotales += 1;
+            $puntosplayer.innerText = victoriasPlayer;
+            document.querySelector('.jugador').appendChild($puntosplayer);
             losResultados.innerText = 'Rondas Totales:'+rondastotales;
             quienGano.innerText = 'Punto para el Jugador';
-            losResultados.append(quienGano);
+            document.querySelector('body').appendChild(quienGano);
         }else{
             rondastotales += 1;
             losResultados.innerText = 'Rondas Totales:'+rondastotales;
             quienGano.innerText = 'Fue empate uwu, no hay puntos!';
-            losResultados.append(quienGano);
+            document.querySelector('body').appendChild(quienGano);
         }
+}
+function seterminaeljuego(){
     if(victoriasPC == 5){
         quienGano.innerText = 'GANO LA PC';
         victoriasPC = 0;
         victoriasPlayer = 0;
+        $puntosplayer.innerText = '0';
+        $puntoscomputadora.innerText = '0';
     }else if(victoriasPlayer == 5){
         quienGano.innerText = 'GANO EL JUGADOR';
         victoriasPC = 0;
         victoriasPlayer = 0;
+        $puntosplayer.innerText = '0';
+        $puntoscomputadora.innerText = '0';
     }
 }
-
 let rondastotales = 0,
 victoriasPC = 0,
 victoriasPlayer = 0;
@@ -102,21 +106,28 @@ const elbotonselectorPiedra = document.querySelector(".piedra"),
 elbotonselectorPapel = document.querySelector(".papel"),
 elbotonselectorTijera = document.querySelector(".tijera"),
 losResultados = document.querySelector(".resultados"),
-quienGano = document.createElement('p');
-
+quienGano = document.createElement('p'),
+$puntosplayer = document.createElement('p')
+$puntoscomputadora = document.createElement('p');
+$puntosplayer.innerText = '0';
+$puntoscomputadora.innerText = '0';
+document.querySelector('.computadora').appendChild($puntoscomputadora);
+document.querySelector('.jugador').appendChild($puntosplayer);
 quienGano.style.color = "white";
 quienGano.textContent = "?";
 
 elbotonselectorPiedra.addEventListener("click", function(e){
     juego(playerSelection("piedra"));
+    seterminaeljuego();
 });
 elbotonselectorPapel.addEventListener("click", function(e){
     juego(playerSelection("papel"));
+    seterminaeljuego();
 });
 elbotonselectorTijera.addEventListener("click", function(e){
     juego(playerSelection("tijera"));
+    seterminaeljuego();
 });
 
 losResultados.style.color = "white";
 losResultados.textContent = 'Rondas Totales:'+rondastotales;
-
